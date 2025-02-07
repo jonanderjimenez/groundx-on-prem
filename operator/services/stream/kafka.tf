@@ -73,7 +73,7 @@ while true; do
   # Check if at least one pod with the label 'name=entity-operator' is running and ready
   STATUS=$(kubectl get pods -n ${var.app_internal.namespace} -l strimzi.io/name=${var.stream_internal.service}-cluster-entity-operator -o jsonpath='{.items[0].status.phase}' 2>/dev/null)
   READY=$(kubectl get pods -n ${var.app_internal.namespace} -l strimzi.io/name=${var.stream_internal.service}-cluster-entity-operator -o jsonpath='{.items[0].status.containerStatuses[0].ready}' 2>/dev/null)
-  if [[ "$STATUS" == "Running" && "$READY" == "true" ]]; then
+  if [ "$STATUS"=="Running" ] && [ "$READY"=="true" ]; then
     echo "Entity Operator is ready."
     break
   else

@@ -107,13 +107,13 @@ resource "helm_release" "percona_cluster" {
       }
       secrets = {
         passwords = {
-          root         = var.db.db_root_password
-          xtrabackup   = var.db.db_root_password
-          monitor      = var.db.db_root_password
-          clustercheck = var.db.db_root_password
-          proxyadmin   = var.db.db_root_password
-          operator     = var.db.db_root_password
-          replication  = var.db.db_root_password
+          root         = local.db_settings.db_create_db_password
+          xtrabackup   = local.db_settings.db_create_db_password
+          monitor      = local.db_settings.db_create_db_password
+          clustercheck = local.db_settings.db_create_db_password
+          proxyadmin   = local.db_settings.db_create_db_password
+          operator     = local.db_settings.db_create_db_password
+          replication  = local.db_settings.db_create_db_password
         }
         tls = {
           cluster  = "${var.app_internal.namespace}-cert"

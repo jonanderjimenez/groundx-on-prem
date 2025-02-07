@@ -1,8 +1,8 @@
 _mysql: &mysql
   ro_addr: ${dbRO}
   rw_addr: ${dbRW}
-  user: ${dbUser}
-  password: ${dbPassword}
+  user: ${dbServiceUser}
+  password: ${dbServiceUserPassword}
   database: ${dbName} 
   maxIdle: 5
   maxOpen: 10
@@ -76,8 +76,8 @@ groundxServer:
 init:
   ingestOnly: ${ingestOnly}
   mysql:
-    user: root
-    password: ${dbRootPassword}
+    user: ${dbCreateDBUser}
+    password: ${dbCreateDBPassword}
   search:
     password: ${searchRootPassword}
     searchModel: all_access

@@ -5,12 +5,13 @@ locals {
     cacheNotCluster        = local.cache_settings.is_instance
     cachePort              = local.cache_settings.port
     dashboardService       = var.dashboard_internal.service
-    dbName                 = var.db.db_name
-    dbPassword             = var.db.db_password
-    dbRootPassword         = var.db.db_root_password
+    dbCreateDBPassword     = local.db_settings.db_create_db_password
+    dbCreateDBUser         = local.db_settings.db_create_db_username
+    dbName                 = local.db_settings.db_name
     dbRO                   = local.db_endpoints.ro
     dbRW                   = local.db_endpoints.rw
-    dbUser                 = var.db.db_username
+    dbServiceUser          = local.db_settings.db_service_username
+    dbServiceUserPassword  = local.db_settings.db_service_password
     deploymentType         = var.groundx_internal.type
     documentTPM            = var.throughput.conversions.document.tpm
     engines                = jsonencode(var.engines)

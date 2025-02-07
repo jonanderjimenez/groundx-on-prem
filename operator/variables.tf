@@ -145,19 +145,37 @@ variable "dashboard_internal" {
 
 # DATABASE
 
-variable "db" {
-  description        = "Database service information"
+variable "db_v1" {
+  description        = "Legacy Database service information (deprecated)"
   type               = object({
     db_name          = string
     db_password      = string
     db_root_password = string
     db_username      = string
   })
-  default            = {
-    db_name          = "eyelevel"
-    db_password      = "password"
-    db_root_password = "password"
-    db_username      = "eyelevel"
+  default            = null
+}
+
+variable "db_v2" {
+  description             = "Database service information (as of db v1.0.0)"
+  type                    = object({
+    db_create_db_password = string
+    db_create_db_username = string
+    db_name               = string
+    db_service_password   = string
+    db_service_username   = string
+  })
+  default                 = {
+    # this user must be able to create the eyelevel database and db_service_username
+    db_create_db_password = "password"
+    db_create_db_username = "root"
+
+    # name of the database created
+    db_name               = "eyelevel"
+
+    # this user is created by db_create_db_username and assumed by the pods.
+    db_service_password   = "password" 
+    db_service_username   = "eyelevel"
   }
 }
 
