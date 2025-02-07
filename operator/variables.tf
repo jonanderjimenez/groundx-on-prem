@@ -145,7 +145,7 @@ variable "dashboard_internal" {
 
 # DATABASE
 
-variable "db_v1" {
+variable "db" {
   description        = "Legacy Database service information (deprecated)"
   type               = object({
     db_name          = string

@@ -27,10 +27,10 @@ locals {
   }
 
   db_settings = var.db_v2 != null ? var.db_v2 : {
-    db_service_password   = var.db_v1 != null ? var.db_v1.db_password : "password"
-    db_service_username   = var.db_v1 != null ? var.db_v1.db_username : "eyelevel"
-    db_name               = var.db_v1 != null ? var.db_v1.db_name : "eyelevel"
-    db_create_db_password = var.db_v1 != null ? var.db_v1.db_root_password : "password"
+    db_service_password   = var.db != null ? var.db.db_password : "password"
+    db_service_username   = var.db != null ? var.db.db_username : "eyelevel"
+    db_name               = var.db != null ? var.db.db_name : "eyelevel"
+    db_create_db_password = var.db != null ? var.db.db_root_password : "password"
     db_create_db_username = "root"
   }
 
