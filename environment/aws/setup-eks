@@ -199,14 +199,46 @@ environment = {
 }
 
 cluster = {
-  environment = "aws"
-  has_nvidia = false
-  internet_access = true
+  autoscale        = false
+  environment      = "aws"
+  has_nvidia       = false
+  internet_access  = true
   kube_config_path = "~/.kube/config"
-  prefix = "eyelevel"
-  role = "admin"
-  search = $SEARCH
-  type = "eks"
+  nodes            = {
+    cpu_memory     = "eyelevel-cpu-memory"
+    cpu_only       = "eyelevel-cpu-only"
+    gpu_layout     = "eyelevel-gpu-layout"
+    gpu_ranker     = "eyelevel-gpu-ranker"
+    gpu_summary    = "eyelevel-gpu-summary"
+  }
+  prefix           = "eyelevel"
+  pv               = {
+    name           = "eyelevel-pv"
+    type           = "gp2"
+  }
+  search           = true
+  throughput       = {
+    ingest         = {
+      baseline     = 9600
+      max          = 25000
+    }
+    search = {
+      baseline     = 400000
+      max          = 3600000
+    }
+  }
+  search           = $SEARCH
+  throughput       = {
+    ingest         = {
+      baseline     = 9600
+      max          = 25000
+    }
+    search         = {
+      baseline     = 400000
+      max          = 3600000
+    }
+  }
+  type             = "eks"
 }
 EOF
 
