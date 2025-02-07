@@ -26,6 +26,14 @@ locals {
     rw   = coalesce(var.db_existing.rw, "${var.db_internal.service}-cluster-pxc-db-haproxy.${var.app_internal.namespace}.svc.cluster.local")
   }
 
+  db_settings = var.db_v2 != null ? var.db_v2 : {
+    db_service_password   = var.db != null ? var.db.db_password : "password"
+    db_service_username   = var.db != null ? var.db.db_username : "eyelevel"
+    db_name               = var.db != null ? var.db.db_name : "eyelevel"
+    db_create_db_password = var.db != null ? var.db.db_root_password : "password"
+    db_create_db_username = "root"
+  }
+
   create_file = var.file_existing.base_domain == null || var.file_existing.bucket == null || var.file_existing.password == null || var.file_existing.port == null || var.file_existing.ssl == null
   file_settings = {
     base_domain = coalesce(var.file_existing.base_domain, "${var.file_internal.service}.${var.app_internal.namespace}.svc.cluster.local")
