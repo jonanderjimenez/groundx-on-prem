@@ -6,6 +6,8 @@ do="$ENV_DIR/../bin/operator"
 . "$ENV_DIR/../bin/shared/cli-input"
 . "$ENV_DIR/../bin/shared/util"
 
+must_have kubectl
+must_have terraform
 
 confirm_setup=$(prompt_text "Have you copied operator/env.tfvars.example to operator/env.tfvars and configured the settings?")
 
@@ -142,4 +144,4 @@ fi
 ok && echo "" && ok "EyeLevel application setup complete."
 echo "" && echo "Run \"kubectl -n eyelevel get svc\" to get the API endpoint. It will be the external IP associated with the GroundX load balancer." && echo "" && echo ""
 
-kubectl -n eyelevel get svc groundx-cluster-lb
+kubectl -n eyelevel get svc groundx-service

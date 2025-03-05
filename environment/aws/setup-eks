@@ -9,13 +9,9 @@ do="$ENV_DIR/../../bin/environment"
 must_have aws
 must_have terraform
 
-confirm_setup=$(prompt_text "Have you copied environment/aws/env.tfvars.example to environment/aws/env.tfvars and configured the settings?")
-
-result=$(prompt_input "yn" "$confirm_setup" "empty[@]" "") && ok
-
-if ! $result; then
-    echo "Cancelling deployment."
-    exit 1
+if [ ! -f "$ENV_DIR/env.tfvars" ]; then
+    echo "env.tfvars not found. Copying env.tfvars.example..."
+    cp "$ENV_DIR/env.tfvars.example" "$ENV_DIR/env.tfvars"
 fi
 
 environments=("aws")
@@ -197,7 +193,10 @@ environment = {
   subnets = $subnets
   vpc_id = "$vpc_id"
 }
+EOF
 
+if ! $SEARCH; then
+    cat <<EOF >> "$ENV_DIR/env.tfvars"
 cluster = {
   autoscale        = false
   environment      = "aws"
@@ -216,17 +215,6 @@ cluster = {
     name           = "eyelevel-pv"
     type           = "gp2"
   }
-  search           = true
-  throughput       = {
-    ingest         = {
-      baseline     = 9600
-      max          = 25000
-    }
-    search = {
-      baseline     = 400000
-      max          = 3600000
-    }
-  }
   search           = $SEARCH
   throughput       = {
     ingest         = {
@@ -241,6 +229,7 @@ cluster = {
   type             = "eks"
 }
 EOF
+fi
 
     "$do" "eks" "-t" 2>&1 | tee tf_output.log
 

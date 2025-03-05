@@ -6,6 +6,7 @@ locals {
     graph             = var.cluster.nodes.cpu_only
     groundx           = var.cluster.nodes.cpu_only
     layout_api        = var.cluster.nodes.cpu_only
+    layout_correct    = var.cluster.nodes.cpu_memory
     layout_inference  = var.cluster.nodes.gpu_layout
     layout_map        = var.cluster.nodes.cpu_only
     layout_ocr        = var.cluster.nodes.cpu_memory

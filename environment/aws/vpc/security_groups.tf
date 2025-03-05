@@ -1,5 +1,5 @@
 resource "aws_security_group" "ssh_access" {
-  depends_on = [module.eyelevel_vpc]
+  depends_on  = [module.eyelevel_vpc]
 
   name        = "allow_ssh_vpc_only"
   description = "Security group that allows SSH from VPC subnets only"

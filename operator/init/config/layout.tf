@@ -165,17 +165,6 @@ resource "kubernetes_config_map" "layout_ocr_credentials" {
   }
 }
 
-resource "kubernetes_config_map" "layout_inference_supervisord_16gb_conf" {
-  metadata {
-    name      = "layout-inference-supervisord-16gb-conf-map"
-    namespace = var.app_internal.namespace
-  }
-
-  data = {
-    "supervisord.conf" = local.layout_inference_supervisord
-  }
-}
-
 resource "kubernetes_config_map" "layout_correct_supervisord_conf" {
   metadata {
     name      = "layout-correct-supervisord-conf-map"
@@ -184,6 +173,17 @@ resource "kubernetes_config_map" "layout_correct_supervisord_conf" {
 
   data = {
     "supervisord.conf" = local.layout_correct_supervisord
+  }
+}
+
+resource "kubernetes_config_map" "layout_inference_supervisord_16gb_conf" {
+  metadata {
+    name      = "layout-inference-supervisord-16gb-conf-map"
+    namespace = var.app_internal.namespace
+  }
+
+  data = {
+    "supervisord.conf" = local.layout_inference_supervisord
   }
 }
 

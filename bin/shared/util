@@ -11,12 +11,12 @@ valid_aws=("aws-vpc" "eks")
 valid_groups=("init" "services" "app")
 recursive_types=("init" "services" "app")
 
-valid_apps=("groundx" "layout-webhook" "pre-process" "process" "queue" "summary-client" "upload" "layout" "summary" "ranker")
+valid_apps=("metrics" "groundx" "layout-webhook" "pre-process" "process" "queue" "summary-client" "upload" "layout" "summary" "ranker")
 valid_init=("add" "config")
 valid_services=("cache" "db" "file" "graph" "search" "stream")
 
 # for helm release explicit clean up, in case terraform fails to clean up
-golang_apps=("groundx" "layout-webhook" "pre-process" "process" "queue" "summary-client" "upload")
+golang_apps=("metrics" "groundx" "layout-webhook" "pre-process" "process" "queue" "summary-client" "upload")
 inference_apps=("ranker" "summary")
 inference_process_apps=("layout")
 

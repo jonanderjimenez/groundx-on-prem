@@ -6,8 +6,8 @@ MIN_KUBERNETES_VERSION="1.18"
 BIN_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 . "$BIN_DIR/shared/util"
 
-must_have terraform
 must_have kubectl
+must_have terraform
 
 ALL=false
 GROUP=""

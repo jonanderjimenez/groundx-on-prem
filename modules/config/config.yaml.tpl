@@ -194,9 +194,11 @@ processors:%{ if ingestOnly }
   extraPostDefaults:
     - processorID: 1
       type: skip-generate%{ endif }
+  convert: [11]
   layout: [3]
   map: [4]
   saveFile: [2]
+  skipConvert: [12]
   skipGenerate: [1]
   skipLayout: [5]
   skipMap: [6]
