@@ -192,7 +192,7 @@ variable "nodes" {
       }
       layout_nodes              = {
         ami_type                = "AL2023_x86_64_NVIDIA"
-        desired_size            = 0
+        desired_size            = 1
         ebs                     = {
           delete_on_termination = true
           encrypted             = true
@@ -203,13 +203,13 @@ variable "nodes" {
           volume_size           = 35
           volume_type           = "gp2"
         }
-        instance_types          = ["g6e.xlarge"]
+        instance_types          = ["g4dn.xlarge"]
         max_size                = 5
-        min_size                = 0
+        min_size                = 1
       }
       ranker_nodes              = {
         ami_type                = "AL2023_x86_64_NVIDIA"
-        desired_size            = 0
+        desired_size            = 1
         ebs                     = {
           delete_on_termination = true
           encrypted             = true
@@ -220,9 +220,9 @@ variable "nodes" {
           volume_size           = 75
           volume_type           = "gp2"
         }
-        instance_types          = ["g6e.xlarge"]
+        instance_types          = ["g4dn.2xlarge"]
         max_size                = 10
-        min_size                = 0
+        min_size                = 1
       }
       summary_nodes             = {
         ami_type                = "AL2023_x86_64_NVIDIA"

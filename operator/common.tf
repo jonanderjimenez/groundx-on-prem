@@ -86,6 +86,6 @@ locals {
 
   summary_credentials = {
     api_key  = coalesce(var.summary_existing.api_key, var.admin.api_key)
-    base_url = coalesce(var.summary_existing.base_url, "http://${var.summary_internal.service}-service.${var.app_internal.namespace}.svc.cluster.local")
+    base_url = coalesce(var.summary_existing.base_url, "http://${var.summary_internal.service}-api.${var.app_internal.namespace}.svc.cluster.local")
   }
 }

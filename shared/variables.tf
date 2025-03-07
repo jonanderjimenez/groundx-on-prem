@@ -60,9 +60,9 @@ variable "cluster" {
     nodes            = {
       cpu_memory     = "eyelevel-cpu-memory"
       cpu_only       = "eyelevel-cpu-only"
-      gpu_layout     = "eyelevel-gpu"
-      gpu_ranker     = "eyelevel-gpu"
-      gpu_summary    = "eyelevel-gpu"
+      gpu_layout     = "eyelevel-gpu-layout"
+      gpu_ranker     = "eyelevel-gpu-ranker"
+      gpu_summary    = "eyelevel-gpu-summary"
     }
     prefix           = "eyelevel"
     pv               = {
@@ -72,12 +72,12 @@ variable "cluster" {
     search           = true
     throughput       = {
       ingest         = {
-        baseline     = 4800
-        max          = 4800
+        baseline     = 9600
+        max          = 9600
       }
       search         = {
         baseline     = 400000
-        max          = 3600000
+        max          = 400000
       }
     }
     type             = "eks"
@@ -532,8 +532,8 @@ variable "layout_resources" {
         }
       }
       threads     = 2
-      throughput  = 60000
-      workers     = 2
+      throughput  = 120000
+      workers     = 4
     }
     load_balancer = {
       internal    = true
@@ -879,8 +879,8 @@ variable "ranker_resources" {
           gpu     = 1
         }
       }
-      throughput  = 200000
-      workers     = 7
+      throughput  = 400000
+      workers     = 14
     }
   }
 }
