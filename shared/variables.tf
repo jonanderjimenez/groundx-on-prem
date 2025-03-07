@@ -533,7 +533,7 @@ variable "layout_resources" {
       }
       threads     = 2
       throughput  = 120000
-      workers     = 4
+      workers     = 3
     }
     load_balancer = {
       internal    = true
