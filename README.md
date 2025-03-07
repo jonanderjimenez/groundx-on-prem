@@ -263,9 +263,7 @@ As mentioned in the [node groups](#node-groups) section, node labels are defined
 ```text
 eyelevel-cpu-memory
 eyelevel-cpu-only
-eyelevel-gpu-layout
-eyelevel-gpu-ranker
-eyelevel-gpu-summary
+eyelevel-gpu
 ```
 
 Multiple node labels can be applied to the same node group, so long as resources are available as described in the [total recommended resource](#total-recommended-resources) and [node group resources](#node-group-resources) sections.
@@ -316,15 +314,7 @@ If you already have a Kubernetes cluster, including an existing AWS EKS cluster,
 
 ### Create the VPC and EKS Cluster
 
-1. Create env.tfvars file by copying the example file
-
-```bash
-cp environment/aws/env.tfvars.example environment/aws/env.tfvars
-```
-
-`env.tfvars` is the configuration file Terraform will use when defining the resources. The content of `env.tfvars` will be updated in subsequent steps.
-
-2. Once `env.tfvars` has been created, run:
+1. Run the following command from the base directory:
 
 ```bash
 environment/aws/setup-eks
@@ -367,11 +357,9 @@ The resources being created will incur cost via AWS. It is recommended to follow
 The default resource configurations are specified [here](#total-recommended-resources), consisting of:
 
 ```text
-2x m6a.xlarge
+1x m6a.xlarge
 3x t3a.medium
-1x g4dn.xlarge
-3x g4dn.2xlarge
-2x g5.xlarge
+1x g6e.xlarge
 ~300 GB gp2
 ```
 

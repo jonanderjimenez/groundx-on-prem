@@ -92,11 +92,9 @@ spec:
             limits:
               cpu: "{{ .Values.resources.limits.cpu }}"
               memory: "{{ .Values.resources.limits.memory }}"
-              nvidia.com/gpu: {{ .Values.resources.limits.gpu }}
             requests:
               cpu: "{{ .Values.resources.requests.cpu }}"
               memory: "{{ .Values.resources.requests.memory }}"
-              nvidia.com/gpu: {{ .Values.resources.requests.gpu }}
           {{- end }}
           volumeMounts:
             - name: config-models

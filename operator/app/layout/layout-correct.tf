@@ -18,15 +18,15 @@ resource "helm_release" "layout_correct_service" {
       }
       local           = var.cluster.environment == "local"
       nodeSelector    = {
-        node          = local.node_assignment.layout_map
+        node          = local.node_assignment.layout_correct
       }
       replicas        = {
-        cooldown      = var.layout_resources.map.replicas.cooldown
-        max           = local.replicas.layout.map.max
-        min           = local.replicas.layout.map.min
-        threshold     = var.layout_resources.map.replicas.threshold
+        cooldown      = var.layout_resources.correct.replicas.cooldown
+        max           = local.replicas.layout.correct.max
+        min           = local.replicas.layout.correct.min
+        threshold     = var.layout_resources.correct.replicas.threshold
       }
-      resources       = var.layout_resources.map.resources
+      resources       = var.layout_resources.correct.resources
       securityContext = {
         runAsUser     = local.is_openshift ? coalesce(data.external.get_uid_gid[0].result.UID, 1001) : 1001
       }

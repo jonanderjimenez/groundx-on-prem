@@ -35,14 +35,17 @@ locals {
   }
 
   create_file = var.file_existing.base_domain == null || var.file_existing.bucket == null || var.file_existing.password == null || var.file_existing.port == null || var.file_existing.ssl == null
+
+  file_domain = coalesce(var.file.base_domain, "${var.file_internal.service}.${var.app_internal.namespace}.svc.cluster.local")
+
   file_settings = {
-    base_domain = coalesce(var.file_existing.base_domain, "${var.file_internal.service}.${var.app_internal.namespace}.svc.cluster.local")
-    bucket      = coalesce(var.file_existing.bucket, var.file.upload_bucket)
-    dependency  = coalesce(var.file_existing.base_domain, "${var.file_internal.service}-tenant-hl.${var.app_internal.namespace}.svc.cluster.local")
-    password    = coalesce(var.file_existing.password, var.file.password)
-    port        = coalesce(var.file_existing.port, var.file_internal.port)
-    ssl         = coalesce(var.file_existing.ssl, var.file_resources.ssl)
-    username    = coalesce(var.file_existing.username, var.file.username)
+    base_domain   = coalesce(var.file_existing.base_domain, local.file_domain)
+    bucket        = coalesce(var.file_existing.bucket, var.file.upload_bucket)
+    dependency    = coalesce(var.file_existing.base_domain, "${var.file_internal.service}-tenant-hl.${var.app_internal.namespace}.svc.cluster.local")
+    password      = coalesce(var.file_existing.password, var.file.password)
+    port          = coalesce(var.file_existing.port, var.file_internal.port)
+    ssl           = coalesce(var.file_existing.ssl, var.file_resources.ssl)
+    username      = coalesce(var.file_existing.username, var.file.username)
   }
 
   create_graph = var.cluster.search && var.app.graph && (var.graph_existing.addr == null)
@@ -83,6 +86,6 @@ locals {
 
   summary_credentials = {
     api_key  = coalesce(var.summary_existing.api_key, var.admin.api_key)
-    base_url = coalesce(var.summary_existing.base_url, "http://${var.summary_internal.service}-service.${var.app_internal.namespace}.svc.cluster.local")
+    base_url = coalesce(var.summary_existing.base_url, "http://${var.summary_internal.service}-api.${var.app_internal.namespace}.svc.cluster.local")
   }
 }

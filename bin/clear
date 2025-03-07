@@ -3,7 +3,18 @@
 BIN_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 . "$BIN_DIR/shared/util"
 
-rm_types=(".terraform" ".terraform.lock.hcl" "terraform.tfstate" "terraform.tfstate.backup" ".DS_Store" ".terraform.tfstate.lock.info" "shared_variables.tf" "common.tf" "variables.tf" "env.auto.tfvars")
+rm_types=(".terraform" ".terraform.lock.hcl" "terraform.tfstate" "terraform.tfstate.backup" ".DS_Store" ".terraform.tfstate.lock.info" "shared_variables.tf" "common.tf" "variables.tf" "env.auto.tfvars" "helm_release.tf" "locals.tf" "node_assignments.tf" "openshift.tf" "shared_common.tf" "not-openshift.tf" "versions.tf")
+
+rm -rf "$BIN_DIR/.DS_Store"
+rm -rf "$BIN_DIR/../.DS_Store"
+rm -rf "$BIN_DIR/../.git"
+rm -rf "$BIN_DIR/../_tls.crt"
+rm -rf "$BIN_DIR/../_tls.key"
+rm -rf "$BIN_DIR/../ca.crt"
+rm -rf "$BIN_DIR/../gcv_credentials.json"
+rm -rf "$BIN_DIR/../out"
+rm -rf "$BIN_DIR/../tf_output.log"
+rm -rf "$BIN_DIR/../modules/.DS_Store"
 
 for (( idx=${#valid_envs[@]}-1 ; idx>=0 ; idx-- )) ; do
     if [[ "${valid_envs[$idx]}" == "aws" ]]; then
@@ -17,6 +28,13 @@ for (( idx=${#valid_envs[@]}-1 ; idx>=0 ; idx-- )) ; do
             done
         done
     fi
+    rm -rf "$BIN_DIR/../environment/${valid_envs[$idx]}/.DS_Store"
+    rm -rf "$BIN_DIR/../environment/${valid_envs[$idx]}/env.tfvars"
+done
+rm -rf "$BIN_DIR/../environment/.DS_Store"
+
+for (( kdx=${#rm_types[@]}-1 ; kdx>=0 ; kdx-- )) ; do
+    rm -rf "$BIN_DIR/../environment/estimate/${rm_types[$kdx]}"
 done
 
 for (( idx=${#valid_groups[@]}-1 ; idx>=0 ; idx-- )) ; do
@@ -39,4 +57,7 @@ for (( idx=${#valid_groups[@]}-1 ; idx>=0 ; idx-- )) ; do
             done
         done
     fi
+    rm -rf "$BIN_DIR/../operator/${valid_groups[$idx]}/.DS_Store"
 done
+rm -rf "$BIN_DIR/../operator/.DS_Store"
+rm -rf "$BIN_DIR/../operator/env.tfvars"

@@ -49,6 +49,12 @@ locals {
         node = local.node_assignment.layout_api
         resources = var.layout_resources.api.resources
       }
+      correct = {
+        max = max(3, ceil(local.max_ingest / var.layout_resources.correct.throughput))
+        min = max(1, ceil(local.baseline_ingest / var.layout_resources.correct.throughput))
+        node = local.node_assignment.layout_correct
+        resources = var.layout_resources.correct.resources
+      }
       inference = {
         max = max(3, ceil(local.max_ingest / var.layout_resources.inference.throughput))
         min = max(1, ceil(local.baseline_ingest / var.layout_resources.inference.throughput))

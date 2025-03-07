@@ -73,9 +73,9 @@ variable "engines" {
       baseURL          = null
       engineID         = "mcpm-o-2-6"
       maxInputTokens   = 2000
-      maxRequests      = 4
+      maxRequests      = 2
       maxTokens        = 10000000000
-      requestLimit     = 4
+      requestLimit     = 2
       type             = null
       vision           = true
     }
@@ -245,11 +245,13 @@ variable "db_internal" {
 variable "file" {
   description     = "Database service information"
   type            = object({
+    base_domain   = string
     password      = string
     upload_bucket = string
     username      = string
   })
   default         = {
+    base_domain   = null
     password      = "minio123"
     upload_bucket = "eyelevel"
     username      = "minio"
@@ -426,24 +428,6 @@ variable "language_configs" {
         plugins       = {
           enabled     = false
           installList = []
-        }
-      }
-    }
-    ko                = {
-      models          = [
-        {
-          maxTokens   = 131072
-          name        = "Bllossom/llama-3.2-Korean-Bllossom-3B"
-          throughput  = 400000
-          type        = "ranker"
-          version     = "ko"
-          workers     = 2
-        },
-      ]
-      search          = {
-        plugins       = {
-          enabled     = true
-          installList = ["analysis-nori"]
         }
       }
     }
@@ -737,8 +721,8 @@ variable "queue_internal" {
 # RANKER
 
 variable "ranker_internal" {
-  description    = "Ranker internal settings"
-  type           = object({
+  description      = "Ranker internal settings"
+  type             = object({
     api            = object({
       image        = object({
         pull       = string
@@ -753,17 +737,17 @@ variable "ranker_internal" {
         repository = string
         tag        = string
       })
-      pv            = object({
-        access      = string
-        capacity    = string
-        mount       = string
+      pv           = object({
+        access     = string
+        capacity   = string
+        mount      = string
       })
       queues       = string
     })
     service        = string
     version        = string
   })
-  default        = {
+  default          = {
     api            = {
       image        = {
         pull       = "Always"
@@ -778,10 +762,10 @@ variable "ranker_internal" {
         repository = "ranker-inference"
         tag        = "latest"
       }
-      pv            = {
-        access      = "ReadWriteMany"
-        capacity    = "10Gi"
-        mount       = "/mnt/ranker-model"
+      pv           = {
+        access     = "ReadWriteMany"
+        capacity   = "10Gi"
+        mount      = "/mnt/ranker-model"
       }
       queues       = "inference_queue"
     }
@@ -810,7 +794,7 @@ variable "search" {
 }
 
 variable "search_existing" {
-  description = "Search settings, if using an existing OpenSearch instance outside of Kubernetes"
+  description     = "Search settings, if using an existing OpenSearch instance outside of Kubernetes"
   type            = object({
     # no protocol, no port
     base_domain   = string
