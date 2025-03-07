@@ -263,7 +263,9 @@ As mentioned in the [node groups](#node-groups) section, node labels are defined
 ```text
 eyelevel-cpu-memory
 eyelevel-cpu-only
-eyelevel-gpu
+eyelevel-gpu-layout
+eyelevel-gpu-ranker
+eyelevel-gpu-summary
 ```
 
 Multiple node labels can be applied to the same node group, so long as resources are available as described in the [total recommended resource](#total-recommended-resources) and [node group resources](#node-group-resources) sections.
@@ -359,6 +361,8 @@ The default resource configurations are specified [here](#total-recommended-reso
 ```text
 1x m6a.xlarge
 3x t3a.medium
+1x g4dn.xlarge
+1x g4dn.2xlarge
 1x g6e.xlarge
 ~300 GB gp2
 ```

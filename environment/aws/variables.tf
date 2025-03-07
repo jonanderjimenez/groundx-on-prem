@@ -234,7 +234,7 @@ variable "nodes" {
           kms_key_id            = null
           snapshot_id           = null
           throughput            = null
-          volume_size           = 150
+          volume_size           = 100
           volume_type           = "gp2"
         }
         instance_types          = ["g6e.xlarge"]

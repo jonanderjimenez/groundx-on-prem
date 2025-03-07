@@ -73,9 +73,9 @@ variable "engines" {
       baseURL          = null
       engineID         = "mcpm-o-2-6"
       maxInputTokens   = 2000
-      maxRequests      = 2
+      maxRequests      = 4
       maxTokens        = 10000000000
-      requestLimit     = 2
+      requestLimit     = 4
       type             = null
       vision           = true
     }
