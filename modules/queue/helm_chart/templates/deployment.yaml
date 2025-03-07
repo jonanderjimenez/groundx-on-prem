@@ -30,6 +30,9 @@ spec:
       - name: {{ .Values.service.name }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: "{{ .Values.image.pull }}"
+        env:
+          - name: IS_TEST
+            value: "1"
         ports:
         - containerPort: 8080
         securityContext:

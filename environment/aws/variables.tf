@@ -57,7 +57,7 @@ variable "autoscaler_internal" {
       }
       requests   = {
         cpu      = 0.1
-        memory   = "256Mi"
+        memory   = "128Mi"
       }
     }
   }
@@ -192,7 +192,7 @@ variable "nodes" {
       }
       layout_nodes              = {
         ami_type                = "AL2023_x86_64_NVIDIA"
-        desired_size            = 1
+        desired_size            = 0
         ebs                     = {
           delete_on_termination = true
           encrypted             = true
@@ -203,13 +203,13 @@ variable "nodes" {
           volume_size           = 35
           volume_type           = "gp2"
         }
-        instance_types          = ["g4dn.xlarge"]
+        instance_types          = ["g6e.xlarge"]
         max_size                = 5
-        min_size                = 1
+        min_size                = 0
       }
       ranker_nodes              = {
         ami_type                = "AL2023_x86_64_NVIDIA"
-        desired_size            = 1
+        desired_size            = 0
         ebs                     = {
           delete_on_termination = true
           encrypted             = true
@@ -220,9 +220,9 @@ variable "nodes" {
           volume_size           = 75
           volume_type           = "gp2"
         }
-        instance_types          = ["g4dn.2xlarge"]
+        instance_types          = ["g6e.xlarge"]
         max_size                = 10
-        min_size                = 1
+        min_size                = 0
       }
       summary_nodes             = {
         ami_type                = "AL2023_x86_64_NVIDIA"
@@ -234,7 +234,7 @@ variable "nodes" {
           kms_key_id            = null
           snapshot_id           = null
           throughput            = null
-          volume_size           = 100
+          volume_size           = 150
           volume_type           = "gp2"
         }
         instance_types          = ["g6e.xlarge"]

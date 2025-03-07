@@ -73,9 +73,9 @@ variable "engines" {
       baseURL          = null
       engineID         = "mcpm-o-2-6"
       maxInputTokens   = 2000
-      maxRequests      = 4
+      maxRequests      = 2
       maxTokens        = 10000000000
-      requestLimit     = 4
+      requestLimit     = 2
       type             = null
       vision           = true
     }
@@ -428,24 +428,6 @@ variable "language_configs" {
         plugins       = {
           enabled     = false
           installList = []
-        }
-      }
-    }
-    ko                = {
-      models          = [
-        {
-          maxTokens   = 131072
-          name        = "Bllossom/llama-3.2-Korean-Bllossom-3B"
-          throughput  = 400000
-          type        = "ranker"
-          version     = "ko"
-          workers     = 2
-        },
-      ]
-      search          = {
-        plugins       = {
-          enabled     = true
-          installList = ["analysis-nori"]
         }
       }
     }

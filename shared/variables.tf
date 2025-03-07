@@ -60,9 +60,9 @@ variable "cluster" {
     nodes            = {
       cpu_memory     = "eyelevel-cpu-memory"
       cpu_only       = "eyelevel-cpu-only"
-      gpu_layout     = "eyelevel-gpu-layout"
-      gpu_ranker     = "eyelevel-gpu-ranker"
-      gpu_summary    = "eyelevel-gpu-summary"
+      gpu_layout     = "eyelevel-gpu"
+      gpu_ranker     = "eyelevel-gpu"
+      gpu_summary    = "eyelevel-gpu"
     }
     prefix           = "eyelevel"
     pv               = {
@@ -72,8 +72,8 @@ variable "cluster" {
     search           = true
     throughput       = {
       ingest         = {
-        baseline     = 9600
-        max          = 25000
+        baseline     = 4800
+        max          = 4800
       }
       search         = {
         baseline     = 400000
@@ -188,7 +188,7 @@ variable "db_resources" {
           memory = "12Gi"
         }
         requests = {
-          cpu    = 0.2
+          cpu    = 0.1
           memory = "512Mi"
         }
       }
@@ -201,7 +201,7 @@ variable "db_resources" {
         memory   = "12Gi"
       }
       requests   = {
-        cpu      = 0.75
+        cpu      = 0.5
         memory   = "1Gi"
       }
     }
@@ -247,8 +247,8 @@ variable "file_resources" {
         memory          = "12Gi"
       }
       requests          = {
-        cpu             = 0.2
-        memory          = "512Mi"
+        cpu             = 0.1
+        memory          = "256Mi"
       }
     }
     ssl                 = false
@@ -281,8 +281,8 @@ variable "graph_resources" {
         memory = "12Gi"
       }
       requests = {
-        cpu    = 0.2
-        memory = "512Mi"
+        cpu    = 0.1
+        memory = "256Mi"
       }
     }
   }
@@ -506,7 +506,7 @@ variable "layout_resources" {
           memory  = "16Gi"
         }
         requests  = {
-          cpu     = 3
+          cpu     = 1.5
           memory  = "1Gi"
         }
       }
@@ -526,14 +526,14 @@ variable "layout_resources" {
           gpu     = 1
         }
         requests  = {
-          cpu     = 1
+          cpu     = 0.5
           memory  = "2Gi"
           gpu     = 1
         }
       }
       threads     = 2
-      throughput  = 120000
-      workers     = 4
+      throughput  = 60000
+      workers     = 2
     }
     load_balancer = {
       internal    = true
@@ -569,7 +569,7 @@ variable "layout_resources" {
           memory  = "16Gi"
         }
         requests  = {
-          cpu     = 3
+          cpu     = 1.5
           memory  = "1Gi"
         }
       }
@@ -874,13 +874,13 @@ variable "ranker_resources" {
           gpu     = 1
         }
         requests  = {
-          cpu     = 6
-          memory  = "12Gi"
+          cpu     = 1.5
+          memory  = "4Gi"
           gpu     = 1
         }
       }
-      throughput  = 400000
-      workers     = 14
+      throughput  = 200000
+      workers     = 7
     }
   }
 }
@@ -1060,8 +1060,8 @@ variable "summary_resources" {
           gpu     = 1
         }
         requests  = {
-          cpu     = 1
-          memory  = "6Gi"
+          cpu     = 0.5
+          memory  = "2Gi"
           gpu     = 1
         }
       }
