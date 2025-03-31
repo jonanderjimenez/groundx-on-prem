@@ -5,6 +5,7 @@ env = dict(
     cacheDir="/app/hf_models_cache",
     callbackAPIKey="${validUsername}",
     deviceType="${deviceType}",
+    env="prod",
     includeLS=False,
     layoutBroker="redis://${cacheAddr}:${cachePort}/0",
     layoutLogger="${layoutService}",
