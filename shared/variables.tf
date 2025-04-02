@@ -522,7 +522,7 @@ variable "layout_resources" {
       resources   = {
         limits    = {
           cpu     = 2
-          memory  = "6Gi"
+          memory  = "15Gi"
           gpu     = 1
         }
         requests  = {
@@ -531,9 +531,9 @@ variable "layout_resources" {
           gpu     = 1
         }
       }
-      threads     = 2
+      threads     = 6
       throughput  = 120000
-      workers     = 3
+      workers     = 1
     }
     load_balancer = {
       internal    = true

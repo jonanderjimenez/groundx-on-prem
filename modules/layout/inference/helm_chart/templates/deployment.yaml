@@ -77,14 +77,14 @@ spec:
             httpGet:
               path: /alive
               port: 8080
-            initialDelaySeconds: 120
+            initialDelaySeconds: 30
             failureThreshold: 8
             periodSeconds: 15
           readinessProbe:
             httpGet:
               path: /health
               port: 8080
-            initialDelaySeconds: 180
+            initialDelaySeconds: 90
             failureThreshold: 20
             periodSeconds: 15
           {{- if not .Values.local }}
