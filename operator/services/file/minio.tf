@@ -73,16 +73,6 @@ resource "helm_release" "minio_tenant" {
           nodeSelector = {
             node = local.node_assignment.file
           }
-          resources = {
-            limits            = {
-              cpu             = local.pool.limits
-              memory          = var.file_resources.resources.limits.memory
-            }
-            requests          = {
-              cpu             = local.pool.requests
-              memory          = var.file_resources.resources.requests.memory
-            }
-          }
           securityContext = {
             runAsUser  = tonumber(local.is_openshift ? coalesce(data.external.get_uid_gid[0].result.UID, 1000) : 1000)
             runAsGroup = tonumber(local.is_openshift ? coalesce(data.external.get_uid_gid[0].result.GID, 1000) : 1000)

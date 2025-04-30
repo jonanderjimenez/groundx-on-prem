@@ -901,15 +901,17 @@ variable "stream_internal" {
 # SUMMARY
 
 variable "summary_existing" {
-  description = "Summary settings, if using OpenAI vs private hosted model"
-  nullable    = true
-  type        = object({
-    api_key   = string
-    base_url  = string
+  description    = "Summary settings, if using OpenAI vs private hosted model"
+  nullable       = true
+  type           = object({
+    api_key      = string
+    base_url     = string
+    service_type = string
   })
-  default     = {
-    api_key   = null
-    base_url  = null
+  default        = {
+    api_key      = null
+    base_url     = null
+    service_type = null
   }
 }
 

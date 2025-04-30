@@ -69,7 +69,7 @@ variable "cluster" {
       name           = "eyelevel-pv"
       type           = "gp2"
     }
-    search           = true
+    search           = false
     throughput       = {
       ingest         = {
         baseline     = 9600
@@ -156,10 +156,6 @@ variable "db_resources" {
     proxy        = object({
       replicas   = number
       resources  = object({
-        limits   = object({
-          cpu    = number
-          memory = string
-        })
         requests = object({
           cpu    = number
           memory = string
@@ -169,10 +165,6 @@ variable "db_resources" {
     pv_size      = string
     replicas     = number
     resources    = object({
-      limits     = object({
-        cpu      = number
-        memory   = string
-      })
       requests   = object({
         cpu      = number
         memory   = string
@@ -183,13 +175,9 @@ variable "db_resources" {
     proxy        = {
       replicas   = 1
       resources  = {
-        limits   = {
-          cpu    = 3
-          memory = "12Gi"
-        }
         requests = {
-          cpu    = 0.1
-          memory = "512Mi"
+          cpu    = 0.6
+          memory = "1Gi"
         }
       }
     }
@@ -201,7 +189,7 @@ variable "db_resources" {
         memory   = "12Gi"
       }
       requests   = {
-        cpu      = 0.5
+        cpu      = 0.6
         memory   = "1Gi"
       }
     }
@@ -488,7 +476,7 @@ variable "layout_resources" {
         }
         requests  = {
           cpu     = 0.1
-          memory  = "128Mi"
+          memory  = "256Mi"
         }
       }
       threads     = 2
@@ -570,7 +558,7 @@ variable "layout_resources" {
         }
         requests  = {
           cpu     = 1.5
-          memory  = "1Gi"
+          memory  = "2Gi"
         }
       }
       threads     = 1
@@ -589,7 +577,7 @@ variable "layout_resources" {
         }
         requests  = {
           cpu     = 0.1
-          memory  = "256Mi"
+          memory  = "4Gi"
         }
       }
       threads     = 1
@@ -608,7 +596,7 @@ variable "layout_resources" {
         }
         requests  = {
           cpu     = 0.2
-          memory  = "256Mi"
+          memory  = "4Gi"
         }
       }
       threads     = 1
@@ -703,7 +691,7 @@ variable "pre_process_resources" {
       }
       requests  = {
         cpu     = 0.2
-        memory  = "512Mi"
+        memory  = "1Gi"
       }
     }
     throughput  = 9600
@@ -1111,7 +1099,7 @@ variable "summary_client_resources" {
       }
       requests  = {
         cpu     = 0.1
-        memory  = "256Mi"
+        memory  = "512Mi"
       }
     }
     throughput  = 9600
