@@ -71,7 +71,7 @@ variable "engines" {
     {
       apiKey           = null
       baseURL          = null
-      engineID         = "mcpm-o-2-6"
+      engineID         = "gemma-3-4b-it"
       maxInputTokens   = 2000
       maxRequests      = 4
       maxTokens        = 10000000000
@@ -953,7 +953,7 @@ variable "summary_internal" {
     }
     inference       = {
       device        = "cuda"
-      deviceUtilize = 0.5
+      deviceUtilize = 0.33
       image         = {
         pull        = "Always"
         repository  = "summary-inference"
