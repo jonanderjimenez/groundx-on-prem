@@ -147,34 +147,34 @@ The NVIDIA GPU operator should update your NVIDIA drivers and other software com
 
 ##### Total Recommended Resources
 
-The GroundX On-Prem default resource requirements are:
+The GroundX On-Prem recommended resource requirements are:
 
 ```text
 eyelevel-cpu-only
-    40 GB     disk drive space
+    80 GB     disk drive space
     8         CPU cores
     16 GB     RAM
 
 eyelevel-cpu-memory
-    40 GB     disk drive space
+    20 GB     disk drive space
     4         CPU cores
     16 GB     RAM
 
 eyelevel-gpu-layout
     16 GB     GPU memory
-    32 GB     disk drive space
+    35 GB     disk drive space
     4         CPU cores
     12 GB     RAM
 
 eyelevel-gpu-ranker
     16 GB     GPU memory
-    150 GB    disk drive space
+    75 GB     disk drive space
     8         CPU cores
     30 GB     RAM
 
 eyelevel-gpu-summary
     48 GB     GPU memory
-    150 GB    disk drive space
+    100 GB    disk drive space
     4         CPU cores
     30 GB     RAM
 ```
@@ -191,32 +191,21 @@ The resource requirements are as follows:
 
 Pods in this node group have minimal requirements on CPU, RAM, and disk drive space. They can run on virtually any machine with the [supported architecture](#chip-architecture).
 
+The resource requirements for these pods are described detail in [operator/variables.tf](operator/variables.tf) and the [Total Recommended Resources](#total-recommended-resources) section above.
+
 ###### eyelevel-cpu-memory
 
 Pods in this node group have a range of requirements on CPU, RAM, and disk drive space but can typically run on most machines with the [supported architecture](#chip-architecture).
 
 CPU and memory intensive ingestion pipeline pods, such as `layout_ocr`, `layout_save`, and `pre_process`, will deploy to the **eyelevel-cpu-memory** nodes. The `layout_ocr` pod includes tesseract, which benefits from access to multiple vCPU cores.
 
-These pods have the following range of requirements (per pod), which are described detail in [operator/variables.tf](operator/variables.tf):
-
-```text
-20 - 75 GB    disk drive space
-0.5 - 4       CPU cores
-0.5 - 4 GB    RAM
-```
+The resource requirements for these pods are described detail in [operator/variables.tf](operator/variables.tf) and the [Total Recommended Resources](#total-recommended-resources) section above.
 
 ###### eyelevel-gpu-layout
 
 Pods in this node group have specific requirements on GPU, CPU, RAM, and disk drive space.
 
-Each pod requires up to:
-
-```text
-16 GB   GPU memory
-32 GB   disk drive space
-4       CPU core
-12 GB   RAM
-```
+The resource requirements for these pods are described detail in [operator/variables.tf](operator/variables.tf) and the [Total Recommended Resources](#total-recommended-resources) section above.
 
 The current configuration for this service assumes an NVIDIA GPU with 16 GB of GPU memory, 4 CPU cores, and at least 12 GB RAM. It deploys 1 pod with 6 workers on this node (called `workers` in `operator/variables.tf`) and claims the GPU via the `nvidia.com/gpu` resource provided by the [NVIDIA GPU operator](https://github.com/NVIDIA/gpu-operator).
 
@@ -226,16 +215,9 @@ If your machine has different resources than this, you will need to modify `layo
 
 Pods in this node group have specific requirements on GPU, CPU, RAM, and disk drive space.
 
-Each pod requires up to:
+The resource requirements for these pods are described detail in [operator/variables.tf](operator/variables.tf) and the [Total Recommended Resources](#total-recommended-resources) section above.
 
-```text
-16 GB  GPU memory
-150 GB disk drive space
-4      CPU core
-30 GB  RAM
-```
-
-The current configuration for this service assumes an NVIDIA GPU with 16 GB of GPU memory, 4 CPU cores, and at least 14 GB RAM. It deploys 1 pod with 14 workers on this node (called `workers` in `operator/variables.tf`). It does not claim the GPU via the `nvidia.com/gpu` resource provided by the [NVIDIA GPU operator](https://github.com/NVIDIA/gpu-operator) but uses 16 GB of GPU memory.
+The current configuration for this service assumes an NVIDIA GPU with 16 GB of GPU memory, 4 CPU cores, and at least 30 GB RAM. It deploys 1 pod with 14 workers on this node (called `workers` in `operator/variables.tf`). It does not claim the GPU via the `nvidia.com/gpu` resource provided by the [NVIDIA GPU operator](https://github.com/NVIDIA/gpu-operator) but uses 16 GB of GPU memory.
 
 If your machine has different resources than this, you will need to modify `ranker_resources.inference` in your `operator/env.tfvars` using the per pod requirements described above to optimize for your node resources.
 
@@ -243,14 +225,7 @@ If your machine has different resources than this, you will need to modify `rank
 
 Pods in this node group have specific requirements on GPU, CPU, RAM, and disk drive space.
 
-Each pod requires up to:
-
-```text
-24 GB GPU memory
-50 GB disk drive space
-2     CPU core
-15 GB RAM
-```
+The resource requirements for these pods are described detail in [operator/variables.tf](operator/variables.tf) and the [Total Recommended Resources](#total-recommended-resources) section above.
 
 The current configuration for this service assumes an NVIDIA GPU with 48 GB of GPU memory, 4 CPU cores, and at least 30 GB RAM. It deploys 2 pods on this node (called `workers` in `operator/variables.tf`). It does not claim the GPU via the `nvidia.com/gpu` resource provided by the [NVIDIA GPU operator](https://github.com/NVIDIA/gpu-operator) but uses 24 GB of GPU memory per worker.
 
