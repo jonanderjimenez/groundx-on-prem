@@ -69,7 +69,7 @@ variable "cluster" {
       name           = "eyelevel-pv"
       type           = "gp2"
     }
-    search           = false
+    search           = true
     throughput       = {
       ingest         = {
         baseline     = 9600
