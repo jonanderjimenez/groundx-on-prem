@@ -28,14 +28,14 @@ resource "helm_release" "opensearch_operator" {
       nodeGroup   = "master"
       nodeSelector = {
         node = local.node_assignment.search
-        tolerations = [
-          {
-            key    = "node"
-            value  = local.node_assignment.search
-            effect = "NoSchedule"
-          }
-        ]
       }
+      tolerations = [
+        {
+          key    = "node"
+          value  = local.node_assignment.search
+          effect = "NoSchedule"
+        }
+      ]
       persistence = {
         enabled = true
         enableInitChown = false

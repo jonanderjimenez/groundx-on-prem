@@ -25,14 +25,14 @@ resource "helm_release" "summary_inference_service" {
       local               = var.cluster.environment == "local"
       nodeSelector        = {
         node              = local.node_assignment.summary_inference
-        tolerations       = [
-          {
-            key              = "node"
-            value            = local.node_assignment.summary_inference
-            effect           = "NoSchedule"
-          }
-        ]
       }
+      tolerations         = [
+        {
+          key              = "node"
+          value            = local.node_assignment.summary_inference
+          effect           = "NoSchedule"
+        }
+      ]
       pv                  = {
         access            = var.summary_internal.inference.pv.access
         capacity          = var.summary_internal.inference.pv.capacity

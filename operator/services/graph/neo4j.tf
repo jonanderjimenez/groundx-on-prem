@@ -18,14 +18,14 @@ resource "helm_release" "neo4j" {
       }
       nodeSelector = {
         node = local.node_assignment.graph
-        tolerations = [
-            {
-              key    = "node"
-              value  = local.node_assignment.graph 
-              effect = "NoSchedule"
-            }
-        ]
       }
+      tolerations = [
+        {
+          key    = "node"
+          value  = local.node_assignment.graph
+          effect = "NoSchedule"
+        }
+      ]
       securityContext = {
         runAsUser  = local.is_openshift ? coalesce(data.external.get_uid_gid[0].result.UID, 1001) : 1001
         runAsGroup = local.is_openshift ? coalesce(data.external.get_uid_gid[0].result.GID, 1001) : 1001

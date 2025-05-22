@@ -21,14 +21,14 @@ resource "helm_release" "percona_operator" {
     yamlencode({
       nodeSelector = {
         node = local.node_assignment.db
-        tolerations = [
-          {
-            key    = "node"
-            value  = local.node_assignment.db 
-            effect = "NoSchedule"
-          }
-        ]
       }
+      tolerations = [
+        {
+          key    = "node"
+          value  = local.node_assignment.db 
+          effect = "NoSchedule"
+        }
+      ]
     })
   ]
 }
@@ -51,27 +51,27 @@ resource "helm_release" "percona_cluster" {
         enabled = var.db_internal.backup
         nodeSelector = {
           node = local.node_assignment.db
-          tolerations = [
-            {
-              key    = "node"
-              value  = local.node_assignment.db 
-              effect = "NoSchedule"
-            }
-          ]
         }
+        tolerations = [
+          {
+            key    = "node"
+            value  = local.node_assignment.db 
+            effect = "NoSchedule"
+          }
+        ]
       }
       haproxy = {
         enabled = true
         nodeSelector = {
           node = local.node_assignment.db
-          tolerations = [
-            {
-              key    = "node"
-              value  = local.node_assignment.db 
-              effect = "NoSchedule"
-            }
-          ]
         }
+        tolerations = [
+          {
+            key    = "node"
+            value  = local.node_assignment.db 
+            effect = "NoSchedule"
+          }
+        ]
         resources = {
           requests          = {
             cpu             = local.proxy.requests
@@ -84,17 +84,7 @@ resource "helm_release" "percona_cluster" {
         enabled = var.db_internal.logcollector_enable
         nodeSelector = {
           node = local.node_assignment.db
-          tolerations = [
-            {
-              key    = "node"
-              value  = local.node_assignment.db 
-              effect = "NoSchedule"
-            }
-          ]
         }
-      }
-      nodeSelector = {
-        node = local.node_assignment.db
         tolerations = [
           {
             key    = "node"
@@ -103,43 +93,53 @@ resource "helm_release" "percona_cluster" {
           }
         ]
       }
+      nodeSelector = {
+        node = local.node_assignment.db
+      }
+      tolerations = [
+        {
+          key    = "node"
+          value  = local.node_assignment.db 
+          effect = "NoSchedule"
+        }
+      ]
       pmm = {
         enabled = var.db_internal.pmm_enable
         nodeSelector = {
           node = local.node_assignment.db
-          tolerations = [
-            {
-              key    = "node"
-              value  = local.node_assignment.db 
-              effect = "NoSchedule"
-            }
-          ]
         }
+        tolerations = [
+          {
+            key    = "node"
+            value  = local.node_assignment.db 
+            effect = "NoSchedule"
+          }
+        ]
       }
       proxysql = {
         enabled = false
         nodeSelector = {
           node = local.node_assignment.db
-          tolerations = [
-            {
-              key    = "node"
-              value  = local.node_assignment.db 
-              effect = "NoSchedule"
-            }
-          ]
         }
+        tolerations = [
+          {
+            key    = "node"
+            value  = local.node_assignment.db 
+            effect = "NoSchedule"
+          }
+        ]
       }
       pxc = {
         nodeSelector = {
           node = local.node_assignment.db
-          tolerations = [
-            {
-              key    = "node"
-              value  = local.node_assignment.db 
-              effect = "NoSchedule"
-            }
-          ]
         }
+        tolerations = [
+          {
+            key    = "node"
+            value  = local.node_assignment.db 
+            effect = "NoSchedule"
+          }
+        ]
         persistence = {
           size = var.db_resources.pv_size
         }

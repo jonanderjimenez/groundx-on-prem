@@ -10,14 +10,14 @@ resource "helm_release" "strimzi_operator" {
     yamlencode({
       nodeSelector = {
         node = local.node_assignment.stream
-        tolerations = [
-          {
-            key      = "node"
-            value    = local.node_assignment.stream
-            effect   = "NoSchedule"
-          }
-        ]
       }
+      tolerations = [
+        {
+          key    = "node"
+          value  = local.node_assignment.stream
+          effect = "NoSchedule"
+        }
+      ]
       replicas = var.stream_resources.operator.replicas
     })
   ]
@@ -36,14 +36,14 @@ resource "helm_release" "kafka_cluster" {
     yamlencode({
       nodeSelector = {
         node = local.node_assignment.stream
-        tolerations = [
-          {
-            key      = "node"
-            value    = local.node_assignment.stream
-            effect   = "NoSchedule"
-          }
-        ]
       }
+      tolerations = [
+        {
+          key    = "node"
+          value  = local.node_assignment.stream
+          effect = "NoSchedule"
+        }
+      ]
       partitions = {
         pre_process    = local.replicas.pre_process.max
         process        = local.replicas.process.max

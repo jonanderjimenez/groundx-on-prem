@@ -17,14 +17,14 @@ resource "helm_release" "process_service" {
       local           = var.cluster.environment == "local"
       nodeSelector    = {
         node          = local.node_assignment.process
-        tolerations   = [
-          {
-            key    = "node"
-            value  = local.node_assignment.process 
-            effect = "NoSchedule"
-          }
-        ]
       }
+      tolerations   = [
+        {
+          key    = "node"
+          value  = local.node_assignment.process 
+          effect = "NoSchedule"
+        }
+      ]
       replicas        = {
         cooldown      = var.process_resources.replicas.cooldown
         max           = local.replicas.process.max

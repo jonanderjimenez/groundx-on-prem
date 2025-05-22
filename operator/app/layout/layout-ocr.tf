@@ -21,14 +21,14 @@ resource "helm_release" "layout_ocr_service" {
       local           = var.cluster.environment == "local"
       nodeSelector    = {
         node          = local.node_assignment.layout_ocr
-        tolerations   = [
-          {
-            key    = "node"
-            value  = local.node_assignment.layout_ocr
-            effect = "NoSchedule"
-          }
-        ]
       }
+      tolerations   = [
+        {
+          key    = "node"
+          value  = local.node_assignment.layout_ocr
+          effect = "NoSchedule"
+        }
+      ]
       replicas        = {
         cooldown      = var.layout_resources.ocr.replicas.cooldown
         max           = local.replicas.layout.ocr.max

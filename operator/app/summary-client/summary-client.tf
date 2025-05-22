@@ -17,14 +17,14 @@ resource "helm_release" "summary_client_service" {
       local           = var.cluster.environment == "local"
       nodeSelector    = {
         node          = local.node_assignment.summary_client
-        tolerations = [
-          {
-            key    = "node"
-            value  = local.node_assignment.summary_client 
-            effect = "NoSchedule"
-          }
-        ]
       }
+      tolerations = [
+        {
+          key    = "node"
+          value  = local.node_assignment.summary_client 
+          effect = "NoSchedule"
+        }
+      ]
       replicas        = {
         cooldown      = var.summary_client_resources.replicas.cooldown
         max           = local.replicas.summary_client.max

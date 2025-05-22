@@ -17,14 +17,14 @@ resource "helm_release" "layout_webhook_service" {
       local           = var.cluster.environment == "local"
       nodeSelector    = {
         node          = local.node_assignment.layout_webhook
-        tolerations   = [
-          {
-            key    = "node"
-            value  = local.node_assignment.layout_webhook
-            effect = "NoSchedule"
-          }
-        ]
       }
+      tolerations   = [
+        {
+          key    = "node"
+          value  = local.node_assignment.layout_webhook
+          effect = "NoSchedule"
+        }
+      ]
       replicas        = {
         cooldown      = var.layout_webhook_resources.replicas.cooldown
         max           = local.replicas.layout_webhook.max

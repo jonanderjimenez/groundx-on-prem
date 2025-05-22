@@ -19,14 +19,14 @@ resource "helm_release" "layout_map_service" {
       local           = var.cluster.environment == "local"
       nodeSelector    = {
         node          = local.node_assignment.layout_map
-        tolerations   = [
-          {
-            key    = "node"
-            value  = local.node_assignment.layout_map
-            effect = "NoSchedule"
-          }
-        ]
       }
+      tolerations   = [
+        {
+          key    = "node"
+          value  = local.node_assignment.layout_map
+          effect = "NoSchedule"
+        }
+      ]
       replicas        = {
         cooldown      = var.layout_resources.map.replicas.cooldown
         max           = local.replicas.layout.map.max

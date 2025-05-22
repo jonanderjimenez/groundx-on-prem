@@ -19,14 +19,15 @@ resource "helm_release" "layout_correct_service" {
       local           = var.cluster.environment == "local"
       nodeSelector    = {
         node          = local.node_assignment.layout_correct
-        tolerations   = [
-          {
-            key    = "node"
-            value  = local.node_assignment.layout_correct
-            effect = "NoSchedule"
-          }
-        ]
+      
       }
+      tolerations   = [
+        {
+          key    = "node"
+          value  = local.node_assignment.layout_correct
+          effect = "NoSchedule"
+        }
+      ]
       replicas        = {
         cooldown      = var.layout_resources.correct.replicas.cooldown
         max           = local.replicas.layout.correct.max

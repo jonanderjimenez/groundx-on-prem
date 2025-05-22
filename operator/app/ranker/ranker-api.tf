@@ -20,14 +20,14 @@ resource "helm_release" "ranker_api_service" {
       local           = var.cluster.environment == "local"
       nodeSelector    = {
         node          = local.node_assignment.ranker_api
-        tolerations   = [
-          {
-            key    = "node"
-            value  = local.node_assignment.ranker_api
-            effect = "NoSchedule"
-          }
-        ]
       }
+      tolerations   = [
+        {
+          key    = "node"
+          value  = local.node_assignment.ranker_api
+          effect = "NoSchedule"
+        }
+      ]
       replicas        = {
         cooldown      = var.ranker_resources.api.replicas.cooldown
         max           = local.replicas.ranker.api.max

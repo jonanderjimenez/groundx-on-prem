@@ -25,14 +25,14 @@ resource "helm_release" "minio_operator" {
         }
         nodeSelector = {
           node = local.node_assignment.file
-          tolerations = [
-            {
-              key    = "node"
-              value  = local.node_assignment.file 
-              effect = "NoSchedule"
-            }
-          ]
         }
+        tolerations = [
+          {
+            key    = "node"
+            value  = local.node_assignment.file 
+            effect = "NoSchedule"
+          }
+        ]
         replicaCount    = var.file_resources.operator.replicas
         securityContext = {
           runAsUser  = tonumber(local.is_openshift ? coalesce(data.external.get_uid_gid[0].result.UID, 1000) : 1000)
@@ -69,14 +69,14 @@ resource "helm_release" "minio_tenant" {
         name = "${var.file_internal.service}-tenant"
         nodeSelector = {
           node = local.node_assignment.file
-          tolerations = [
-            {
-              key    = "node"
-              value  = local.node_assignment.file 
-              effect = "NoSchedule"
-            }
-          ]
         }
+        tolerations = [
+          {
+            key    = "node"
+            value  = local.node_assignment.file 
+            effect = "NoSchedule"
+          }
+        ]
         pools = [{
           containerSecurityContext = {
             runAsUser  = tonumber(local.is_openshift ? coalesce(data.external.get_uid_gid[0].result.UID, 1000) : 1000)
@@ -86,14 +86,14 @@ resource "helm_release" "minio_tenant" {
           name = "${var.file_internal.service}-tenant-pool-0"
           nodeSelector = {
             node = local.node_assignment.file
-            tolerations = [
-              {
-                key    = "node"
-                value  = local.node_assignment.file 
-                effect = "NoSchedule"
-              }
-            ]
           }
+          tolerations = [
+            {
+              key    = "node"
+              value  = local.node_assignment.file 
+              effect = "NoSchedule"
+            }
+          ]
           securityContext = {
             runAsUser  = tonumber(local.is_openshift ? coalesce(data.external.get_uid_gid[0].result.UID, 1000) : 1000)
             runAsGroup = tonumber(local.is_openshift ? coalesce(data.external.get_uid_gid[0].result.GID, 1000) : 1000)

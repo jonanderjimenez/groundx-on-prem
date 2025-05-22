@@ -17,14 +17,14 @@ resource "helm_release" "upload_service" {
       local           = var.cluster.environment == "local"
       nodeSelector    = {
         node          = local.node_assignment.upload
-        tolerations   = [
-          {
-            key    = "node"
-            value  = local.node_assignment.upload
-            effect = "NoSchedule"
-          }
-        ]
       }
+      tolerations   = [
+        {
+          key    = "node"
+          value  = local.node_assignment.upload
+          effect = "NoSchedule"
+        }
+      ]
       replicas        = {
         cooldown      = var.upload_resources.replicas.cooldown
         max           = local.replicas.upload.max
