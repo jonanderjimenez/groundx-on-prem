@@ -20,6 +20,13 @@ resource "helm_release" "summary_api_service" {
       local           = var.cluster.environment == "local"
       nodeSelector    = {
         node          = local.node_assignment.summary_api
+        tolerations   = [
+          {
+            key    = "node"
+            value  = local.node_assignment.summary_api
+            effect = "NoSchedule"
+          }
+        ]
       }
       replicas        = {
         cooldown      = var.summary_resources.api.replicas.cooldown

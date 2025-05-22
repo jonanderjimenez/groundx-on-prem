@@ -17,6 +17,13 @@ resource "helm_release" "queue_service" {
       local           = var.cluster.environment == "local"
       nodeSelector    = {
         node          = local.node_assignment.queue
+        tolerations   = [
+          {
+            key    = "node"
+            value  = local.node_assignment.queue
+            effect = "NoSchedule"
+          }
+        ]
       }
       replicas        = {
         cooldown      = var.queue_resources.replicas.cooldown

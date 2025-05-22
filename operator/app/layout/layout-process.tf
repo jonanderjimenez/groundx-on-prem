@@ -19,6 +19,13 @@ resource "helm_release" "layout_process_service" {
       local           = var.cluster.environment == "local"
       nodeSelector    = {
         node          = local.node_assignment.layout_process
+        tolerations   = [
+          {
+            key    = "node"
+            value  = local.node_assignment.layout_process
+            effect = "NoSchedule"
+          }
+        ]
       }
       replicas        = {
         cooldown      = var.layout_resources.process.replicas.cooldown

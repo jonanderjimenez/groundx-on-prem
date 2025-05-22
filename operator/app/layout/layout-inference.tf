@@ -22,6 +22,13 @@ resource "helm_release" "layout_inference_service" {
       local           = var.cluster.environment == "local"
       nodeSelector    = {
         node          = local.node_assignment.layout_inference
+        tolerations   = [
+          {
+            key    = "node"
+            value  = local.node_assignment.layout_inference
+            effect = "NoSchedule"
+          }
+        ]
       }
       replicas        = {
         cooldown      = var.layout_resources.inference.replicas.cooldown

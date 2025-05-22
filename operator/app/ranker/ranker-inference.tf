@@ -26,6 +26,13 @@ resource "helm_release" "ranker_inference_service" {
       model           = local.ranker_model.version
       nodeSelector    = {
         node          = local.node_assignment.ranker_inference
+        tolerations = [
+          {
+            key    = "node"
+            value  = local.node_assignment.ranker_inference
+            effect = "NoSchedule"
+          }
+        ]
       }
       pv              = {
         access        = var.ranker_internal.inference.pv.access

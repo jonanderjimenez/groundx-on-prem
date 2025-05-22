@@ -18,6 +18,13 @@ resource "helm_release" "layout_api_service" {
       local           = var.cluster.environment == "local"
       nodeSelector    = {
         node          = local.node_assignment.layout_api
+        tolerations   = [
+          {
+            key    = "node"
+            value  = local.node_assignment.layout_api
+            effect = "NoSchedule"
+          }
+        ]
       }
       replicas        = {
         cooldown      = var.layout_resources.api.replicas.cooldown

@@ -19,6 +19,13 @@ resource "helm_release" "layout_save_service" {
       local           = var.cluster.environment == "local"
       nodeSelector    = {
         node          = local.node_assignment.layout_save
+        tolerations   = [
+          {
+            key    = "node"
+            value  = local.node_assignment.layout_save
+            effect = "NoSchedule"
+          }
+        ]
       }
       replicas        = {
         cooldown      = var.layout_resources.save.replicas.cooldown

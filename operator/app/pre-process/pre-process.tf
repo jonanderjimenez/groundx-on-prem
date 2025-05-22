@@ -17,6 +17,13 @@ resource "helm_release" "pre_process_service" {
       local           = var.cluster.environment == "local"
       nodeSelector    = {
         node          = local.node_assignment.pre_process
+        tolerations   = [
+          {
+            key    = "node"
+            value  = local.node_assignment.pre_process 
+            effect = "NoSchedule"
+          }
+        ]
       }
       replicas        = {
         cooldown      = var.pre_process_resources.replicas.cooldown

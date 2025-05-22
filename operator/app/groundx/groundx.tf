@@ -20,8 +20,15 @@ resource "helm_release" "groundx_service" {
       }
       ingestOnly      = local.ingest_only
       local           = var.cluster.environment == "local"
-      nodeSelector    = {
-        node          = local.node_assignment.groundx
+      nodeSelector = {
+        node = local.node_assignment.groundx
+        tolerations = [
+          {
+            key    = "node"
+            value  = local.node_assignment.groundx
+            effect = "NoSchedule"
+          }
+        ]
       }
       replicas        = {
         cooldown      = var.groundx_resources.replicas.cooldown
