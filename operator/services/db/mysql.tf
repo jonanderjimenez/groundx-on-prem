@@ -130,27 +130,36 @@ resource "helm_release" "percona_cluster" {
         ]
       }
       pxc = {
+        init = {
+          primary = true
+        }
+
         nodeSelector = {
           node = local.node_assignment.db
         }
+
         tolerations = [
           {
             key    = "node"
-            value  = local.node_assignment.db 
+            value  = local.node_assignment.db
             effect = "NoSchedule"
           }
         ]
+
         persistence = {
           size = var.db_resources.pv_size
         }
+
         resources = {
-          requests          = {
-            cpu             = local.pxc.requests
-            memory          = var.db_resources.resources.requests.memory
+          requests = {
+            cpu    = local.pxc.requests
+            memory = var.db_resources.resources.requests.memory
           }
         }
+
         size = var.db_resources.replicas
       }
+
       secrets = {
         passwords = {
           root         = local.db_settings.db_create_db_password
