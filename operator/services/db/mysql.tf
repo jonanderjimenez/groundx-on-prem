@@ -149,7 +149,7 @@ resource "helm_release" "percona_cluster" {
             memory          = var.db_resources.resources.requests.memory
           }
         }
-        size = 1
+        size = var.db_resources.replicas
       }
       secrets = {
         passwords = {
