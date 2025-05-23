@@ -42,22 +42,6 @@ resource "helm_release" "queue_service" {
         namespace     = var.app_internal.namespace
         version       = var.queue_internal.version
       }
-      probes = {
-        zookeeper = {
-          readinessProbe = {
-            initialDelaySeconds = 30
-            periodSeconds       = 15
-            timeoutSeconds      = 10
-            failureThreshold    = 10
-          }
-          livenessProbe = {
-            initialDelaySeconds = 60
-            periodSeconds       = 15
-            timeoutSeconds      = 10
-            failureThreshold    = 10
-          }
-        }
-      }
     })
   ]
 }
