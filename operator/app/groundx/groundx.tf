@@ -46,6 +46,32 @@ resource "helm_release" "groundx_service" {
         name          = var.groundx_internal.service
         namespace     = var.app_internal.namespace
       }
+      initContainers = [
+        {
+          name    = "wait-for-cache"
+          image   = var.app_internal.busybox.repository
+          command = [
+            "sh", "-c",
+            "until nc -z ${local.cache_settings.addr} ${local.cache_settings.port}; do echo waiting for redis; sleep 5; done"
+          ]
+        },
+        {
+          name    = "wait-for-stream"
+          image   = var.app_internal.busybox.repository
+          command = [
+            "sh", "-c",
+            "until nc -z ${local.stream_settings.base_domain} ${local.stream_settings.port}; do echo waiting for kafka; sleep 5; done"
+          ]
+        },
+        {
+          name    = "wait-for-database"
+          image   = var.app_internal.busybox.repository
+          command = [
+            "sh", "-c",
+            "until nc -z ${local.db_endpoints.ro} ${local.db_endpoints.port}; do echo waiting for mysql; sleep 5; done"
+          ]
+        }
+      ]
     })
   ]
 }
