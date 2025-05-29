@@ -8,6 +8,7 @@ resource "helm_release" "strimzi_operator" {
 
   values = [
     yamlencode({
+      installCRDs  = true
       nodeSelector = {
         node = local.node_assignment.stream
       }
@@ -69,6 +70,16 @@ resource "helm_release" "kafka_cluster" {
         storage  = {
           size = var.stream_resources.zookeeper.storage
         }
+      }
+      readinessProbe = {
+        initialDelaySeconds = 180
+        timeoutSeconds      = 5
+        failureThreshold    = 6
+      }
+      livenessProbe = {
+        initialDelaySeconds = 180
+        timeoutSeconds      = 5
+        failureThreshold    = 6
       }
     })
   ]

@@ -150,6 +150,7 @@ resource "helm_release" "percona_cluster" {
           }
         }
         size = var.db_resources.replicas
+        allowUnsafeBootstrap = true
       }
       secrets = {
         passwords = {
