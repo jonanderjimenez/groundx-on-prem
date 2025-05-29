@@ -2,7 +2,7 @@ resource "helm_release" "groundx_service" {
   name       = var.groundx_internal.service
   namespace  = var.app_internal.namespace
   chart      = "${local.module_path}/groundx/helm_chart"
-
+  timeout = 600
   values = [
     yamlencode({
       busybox         = var.app_internal.busybox
