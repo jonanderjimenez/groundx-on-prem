@@ -70,6 +70,11 @@ resource "helm_release" "kafka_cluster" {
         storage  = {
           size = var.stream_resources.zookeeper.storage
         }
+          service = {
+            type      = "ClusterIP"
+            clusterIP = "None"
+            name      = "${var.stream_internal.service}-zookeeper-nodes"
+          }
       }
       readinessProbe = {
         initialDelaySeconds = 180

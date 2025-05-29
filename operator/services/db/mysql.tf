@@ -149,6 +149,10 @@ resource "helm_release" "percona_cluster" {
             memory          = var.db_resources.resources.requests.memory
           }
         }
+        service = {
+        type      = "ClusterIP"
+        clusterIP = "None"
+        }
         size = var.db_resources.replicas
         allowUnsafeBootstrap = true
       }
